@@ -294,7 +294,7 @@ class _AnimatedBottomNavigationBarState
     extends State<AnimatedBottomNavigationBar> with TickerProviderStateMixin {
   late ValueListenable<ScaffoldGeometry> geometryListenable;
 
-  late AnimationController _bubbleController;
+  //late AnimationController _bubbleController;
 
   double _bubbleRadius = 0;
   double _iconScale = 1;
@@ -311,42 +311,42 @@ class _AnimatedBottomNavigationBarState
   void didUpdateWidget(AnimatedBottomNavigationBar oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.activeIndex != oldWidget.activeIndex) {
-      _startBubbleAnimation();
+      //_startBubbleAnimation();
     }
   }
 
-  _startBubbleAnimation() {
-    _bubbleController = AnimationController(
-      duration: Duration(milliseconds: widget.splashSpeedInMilliseconds ?? 300),
-      vsync: this,
-    );
+  // _startBubbleAnimation() {
+  //   _bubbleController = AnimationController(
+  //     duration: Duration(milliseconds: widget.splashSpeedInMilliseconds ?? 300),
+  //     vsync: this,
+  //   );
 
-    final bubbleCurve = CurvedAnimation(
-      parent: _bubbleController,
-      curve: Curves.linear,
-    );
+  //   final bubbleCurve = CurvedAnimation(
+  //     parent: _bubbleController,
+  //     curve: Curves.linear,
+  //   );
 
-    Tween<double>(begin: 0, end: 1).animate(bubbleCurve)
-      ..addListener(() {
-        setState(() {
-          _bubbleRadius = widget.splashRadius * bubbleCurve.value;
-          if (_bubbleRadius == widget.splashRadius) {
-            _bubbleRadius = 0;
-          }
+  //   Tween<double>(begin: 0, end: 1).animate(bubbleCurve)
+  //     ..addListener(() {
+  //       setState(() {
+  //         _bubbleRadius = widget.splashRadius * bubbleCurve.value;
+  //         if (_bubbleRadius == widget.splashRadius) {
+  //           _bubbleRadius = 0;
+  //         }
 
-          if (bubbleCurve.value < 0.5) {
-            _iconScale = 1 + bubbleCurve.value;
-          } else {
-            _iconScale = 2 - bubbleCurve.value;
-          }
-        });
-      });
+  //         if (bubbleCurve.value < 0.5) {
+  //           _iconScale = 1 + bubbleCurve.value;
+  //         } else {
+  //           _iconScale = 2 - bubbleCurve.value;
+  //         }
+  //       });
+  //     });
 
-    if (_bubbleController.isAnimating) {
-      _bubbleController.reset();
-    }
-    _bubbleController.forward();
-  }
+  //   if (_bubbleController.isAnimating) {
+  //     _bubbleController.reset();
+  //   }
+  //   _bubbleController.forward();
+  // }
 
   @override
   Widget build(BuildContext context) {
